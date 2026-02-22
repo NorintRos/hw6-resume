@@ -1,0 +1,74 @@
+<h1>{{resume.name}}</h1>
+<p class="muted">{{resume.title}} • {{resume.location}}</p>
+
+<p>
+  <strong>Email:</strong> {{resume.email}} |
+  <strong>Phone:</strong> {{resume.phone}} |
+  <strong>Website:</strong> {{resume.website}}
+</p>
+
+{{!-- ✅ if helper --}}
+{{#if resume.openToWork}}
+  <p class="badge">OPEN TO WORK</p>
+{{/if}}
+
+{{!-- ✅ SECTION (via reusable section partial) --}}
+{{#> section title="Summary"}}
+  <p>{{resume.summary}}</p>
+{{/section}}
+
+{{#> section title="Skills"}}
+  {{!-- ✅ each helper --}}
+  <ul>
+    {{#each resume.skills}}
+      <li>{{this}}</li>
+    {{/each}}
+  </ul>
+{{/section}}
+
+{{#> section title="Experience"}}
+  {{#each resume.experience}}
+    {{> item
+        heading=role
+        subheading=company
+        meta=period
+        bullets=highlights
+    }}
+  {{/each}}
+{{/section}}
+
+{{#> section title="Education"}}
+  {{#each resume.education}}
+    {{> item
+        heading=degree
+        subheading=school
+        meta=period
+    }}
+  {{/each}}
+{{/section}}
+
+{{#> section title="Projects"}}
+  <ul>
+    {{#each resume.projects}}
+      <li>
+        <strong>{{uppercase name}}</strong>
+        {{!-- ✅ unless helper --}}
+        {{#unless link}}
+          <span class="muted">(no link yet)</span>
+        {{/unless}}
+
+        {{!-- ✅ if with custom eq helper (example) --}}
+        {{#if featured}}
+          <span class="badge">FEATURED</span>
+        {{/if}}
+
+        <div class="muted">
+          Tech:
+          {{#each tech}}
+            <span class="tag">{{this}}</span>
+          {{/each}}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+{{/section}}

@@ -1,0 +1,17 @@
+<div class="item">
+  <div class="item-head">
+    <div>
+      <strong>{{heading}}</strong>
+      {{#if subheading}}<div class="muted">{{subheading}}</div>{{/if}}
+    </div>
+    {{#if meta}}<div class="muted">{{meta}}</div>{{/if}}
+  </div>
+
+  {{#if bullets}}
+    <ul>
+      {{#each bullets}}
+        <li>{{this}}</li>
+      {{/each}}
+    </ul>
+  {{/if}}
+</div>
